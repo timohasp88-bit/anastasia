@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Для Анастасии</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #3b82f6;
+      --green: #10b981;
+      --red: #ef4444;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; padding: 14px; display: flex; justify-content: center; overflow-x: hidden; }
+
+    .welcome-splash {
+      position: fixed; inset: 0;
+      background: radial-gradient(circle at center, #1e293b 0%, #090d16 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; padding: 20px; text-align: center;
+      animation: splashAutoHide 1.2s ease 3.8s forwards;
+    }
+    @keyframes splashAutoHide {
+      to { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+    .welcome-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      font-weight: 700;
+      background: linear-gradient(120deg, #fde68a, #f59e0b, #60a5fa, #34d399);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.25));
+      opacity: 0; transform: translateY(15px) scale(0.96);
+      animation: textReveal 1.5s ease forwards, shimmer 4s linear infinite;
+    }
+    .welcome-sub {
+      margin-top: 14px; font-size: 0.95rem; color: #cbd5e1; letter-spacing: 0.06em;
+      opacity: 0; animation: subReveal 1.3s ease 0.6s forwards;
+    }
+    @keyframes textReveal { to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes subReveal { to { opacity: 0.85; } }
+    @keyframes shimmer { to { background-position: 200% center; } }
+
+    .container {
+      width: 100%; max-width: 600px; opacity: 0; transform: translateY(10px);
+      animation: containerShow 0.9s ease 4s forwards;
+    }
+    @keyframes containerShow {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      text-align: center; padding: 16px 14px;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px;
+    }
+    header h1 {
+      font-size: 1.3rem; margin-bottom: 4px;
+      background: linear-gradient(90deg, #60a5fa, #34d399);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    header p { color: var(--muted); font-size: 0.84rem; }
+    .user-bar {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 10px 14px; margin-bottom: 12px; display: flex; justify-content: space-between;
+      align-items: center; gap: 10px; font-size: 0.86rem;
+    }
+    .user-badge { color: var(--green); font-weight: 700; }
+    .small-btn {
+      background: #0f172a; color: var(--text); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.78rem; font-weight: 600;
+    }
+    .chat-box {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+      display: flex; flex-direction: column; height: 70vh; min-height: 420px;
+    }
+    .chat-status { font-size: 0.76rem; color: var(--green); margin-bottom: 10px; }
+    .chat-status.err { color: var(--red); }
+    .chat-messages {
+      flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+      padding-right: 4px; margin-bottom: 10px;
+    }
+    .msg { background: #0f172a; padding: 10px 12px; border-radius: 12px; border: 1px solid #334155; max-width: 88%; }
+    .msg.mine { align-self: flex-end; border-color: #2563eb; background: #172554; }
+    .msg.theirs { align-self: flex-start; }
+    .msg-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; margin-bottom: 4px; gap: 10px; }
+    .msg-author { font-weight: 700; color: #60a5fa; }
+    .msg.mine .msg-author { color: #34d399; }
+    .msg-time { color: var(--muted); }
+    .msg-text { font-size: 0.92rem; word-break: break-word; }
+    .chat-row { display: flex; gap: 8px; }
+    input {
+      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
+      background: #0f172a; color: var(--text); font-size: 0.92rem; outline: none;
+    }
+    .btn {
+      padding: 10px 18px; border: none; border-radius: 10px;
+      background: var(--accent); color: white; font-weight: 600; cursor: pointer; font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .modal-bg {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+      align-items: center; justify-content: center; padding: 16px; z-index: 100;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 20px; width: 100%; max-width: 360px; text-align: center;
+    }
+    .modal-card h3 { margin-bottom: 8px; }
+    .modal-card p { color: var(--muted); font-size: 0.84rem; margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="welcome-splash" id="welcome-splash">
+    <h1 class="welcome-title">Здравствуйте, Анастасия ✨</h1>
+    <div class="welcome-sub">Небольшой секретный чат для двоих соседей</div>
+  </div>
+
+  <div class="container" id="main-container">
+    <header>
+      <h1>🏡 Чат для двоих соседей</h1>
+      <p>Закрытая комната 5-го и 2-го этажа</p>
+    </header>
+
+    <div class="user-bar">
+      <div>Вы в чате как: <span class="user-badge" id="current-user">Анастасия</span></div>
+      <button class="small-btn" onclick="openNameModal()">Сменить имя</button>
+    </div>
+
+    <div class="chat-box">
+      <div class="chat-status" id="net-status">🟡 Подключение к прямому эфиру...</div>
+      <div class="chat-messages" id="chat-messages"></div>
+
+      <div class="chat-row">
+        <input type="text" id="msg-input" placeholder="Напишите сообщение..." onkeydown="if(event.key==='Enter') sendMsg()" />
+        <button class="btn" onclick="sendMsg()">Отправить</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-bg" id="name-modal">
+    <div class="modal-card">
+      <h3>Как вас подписать? 👋</h3>
+      <p>Введите ваше имя для чата.</p>
+      <input type="text" id="name-input" placeholder="Ваше имя..." style="margin-bottom: 12px;" onkeydown="if(event.key==='Enter') saveName()" />
+      <button class="btn" style="width:100%;" onclick="saveName()">Сохранить</button>
+    </div>
+  </div>
+
+  <script>
+    class MiniMqtt {
+      constructor(url, clientId) {
+        this.url = url;
+        this.clientId = clientId;
+        this.ws = null;
+        this.connected = false;
+        this.onConnect = () => {};
+        this.onMessage = () => {};
+        this.onClose = () => {};
+      }
+      connect() {
+        this.ws = new WebSocket(this.url, ["mqtt"]);
+        this.ws.binaryType = "arraybuffer";
+        this.ws.onopen = () => {
+          const cid = new TextEncoder().encode(this.clientId);
+          const vh = [0x00, 0x04, 0x4D, 0x51, 0x54, 0x54, 0x04, 0x02, 0x00, 0x3C];
+          const pl = [cid.length >> 8, cid.length & 255, ...cid];
+          const rem = vh.length + pl.length;
+          this.ws.send(new Uint8Array([0x10, ...this.encodeLen(rem), ...vh, ...pl]));
+        };
+        this.ws.onmessage = (e) => {
+          const buf = new Uint8Array(e.data);
+          let pos = 0;
+          while (pos < buf.length) {
+            const firstByte = buf[pos];
+            const type = firstByte >> 4;
+            let mult = 1, len = 0, byte;
+            pos++;
+            do {
+              byte = buf[pos++];
+              len += (byte & 127) * mult;
+              mult *= 128;
+            } while ((byte & 128) !== 0);
+            const body = buf.slice(pos, pos + len);
+            pos += len;
+            if (type === 2 && body[1] === 0) {
+              this.connected = true;
+              this.onConnect();
+              this.pingTimer = setInterval(() => {
+                if (this.ws && this.ws.readyState === 1) this.ws.send(new Uint8Array([0xC0, 0x00]));
+              }, 25000);
+            } else if (type === 3) {
+              const tLen = (body[0] << 8) | body[1];
+              const topic = new TextDecoder().decode(body.slice(2, 2 + tLen));
+              const qos = (firstByte & 0x06) >> 1;
+              const offset = 2 + tLen + (qos > 0 ? 2 : 0);
+              const payload = new TextDecoder().decode(body.slice(offset));
+              this.onMessage(topic, payload);
+            }
+          }
+        };
+        this.ws.onclose = () => {
+          this.connected = false;
+          clearInterval(this.pingTimer);
+          this.onClose();
+        };
+        this.ws.onerror = () => {
+          this.connected = false;
+          this.onClose();
+        };
+      }
+      subscribe(topic) {
+        if (!this.connected) return;
+        const t = new TextEncoder().encode(topic);
+        const body = [0, 1, t.length >> 8, t.length & 255, ...t, 0];
+        this.ws.send(new Uint8Array([0x82, ...this.encodeLen(body.length), ...body]));
+      }
+      publish(topic, msg, retain = true) {
+        if (!this.connected) return;
+        const t = new TextEncoder().encode(topic);
+        const m = new TextEncoder().encode(msg);
+        const body = [t.length >> 8, t.length & 255, ...t, ...m];
+        const header = 0x30 | (retain ? 1 : 0);
+        this.ws.send(new Uint8Array([header, ...this.encodeLen(body.length), ...body]));
+      }
+      encodeLen(len) {
+        const out = [];
+        do {
+          let d = len % 128;
+          len = Math.floor(len / 128);
+          if (len > 0) d |= 128;
+          out.push(d);
+        } while (len > 0);
+        return out;
+      }
+    }
+
+    const TOPIC = "sosedi/5_2/anastasia_private_room_99482";
+    const STORAGE_KEY = "sosedi_chat_state_v14";
+    const BROKERS = [
+      "wss://broker.emqx.io:8084/mqtt",
+      "wss://test.mosquitto.org:8081/mqtt"
+    ];
+
+    let brokerIdx = 0;
+    let client = null;
+    let userName = localStorage.getItem("sosedi_user_name") || "Анастасия";
+    let messages = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const seenIds = new Set(messages.map(m => m.id));
+
+    if (messages.length === 0) {
+      const welcome = {
+        id: "welcome_1",
+        author: "Сосед с 5 этажа",
+        text: "Привет, Анастасия! Не пугайся, это я сделал для нас небольшую закрытую страницу, чтобы не искать друг друга по подъезду. Как твои дела? 🙂",
+        time: new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"})
+      };
+      messages.push(welcome);
+      seenIds.add(welcome.id);
+      saveLocal();
+    }
+
+    function saveLocal() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-100)));
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[s]));
+    }
+
+    function setNetStatus(ok, text) {
+      const el = document.getElementById("net-status");
+      el.className = ok ? "chat-status" : "chat-status err";
+      el.textContent = text;
+    }
+
+    function init() {
+      document.getElementById("current-user").textContent = userName;
+      renderChat();
+      startConnection();
+    }
+
+    function startConnection() {
+      const url = BROKERS[brokerIdx % BROKERS.length];
+      client = new MiniMqtt(url, "sosed_" + Math.random().toString(16).slice(2, 10));
+
+      client.onConnect = () => {
+        setNetStatus(true, "🟢 Прямой эфир по сети активен");
+        client.subscribe(TOPIC);
+      };
+
+      client.onMessage = (topic, payload) => {
+        try {
+          const list = JSON.parse(payload);
+          if (Array.isArray(list)) {
+            let changed = false;
+            list.forEach(m => {
+              if (m && m.id && !seenIds.has(m.id)) {
+                seenIds.add(m.id);
+                messages.push(m);
+                changed = true;
+              }
+            });
+            if (changed) {
+              saveLocal();
+              renderChat();
+            }
+          }
+        } catch (e) {}
+      };
+
+      client.onClose = () => {
+        setNetStatus(false, "🟡 Переключение канала связи...");
+        brokerIdx++;
+        setTimeout(startConnection, 2000);
+      };
+
+      client.connect();
+    }
+
+    function openNameModal() {
+      document.getElementById("name-input").value = userName;
+      document.getElementById("name-modal").classList.add("open");
+    }
+
+    function saveName() {
+      const val = document.getElementById("name-input").value.trim();
+      if (!val) return;
+      userName = val;
+      localStorage.setItem("sosedi_user_name", userName);
+      document.getElementById("current-user").textContent = userName;
+      document.getElementById("name-modal").classList.remove("open");
+      renderChat();
+    }
+
+    function sendMsg() {
+      const input = document.getElementById("msg-input");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const msg = {
+        id: "m_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7),
+        author: userName,
+        text: text,
+        time: new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"})
+      };
+
+      input.value = "";
+      seenIds.add(msg.id);
+      messages.push(msg);
+      saveLocal();
+      renderChat();
+
+      if (client && client.connected) {
+        client.publish(TOPIC, JSON.stringify(messages.slice(-50)), true);
+      }
+    }
+
+    function renderChat() {
+      const box = document.getElementById("chat-messages");
+      const wasAtBottom = box.scrollHeight - box.scrollTop <= box.clientHeight + 80;
+      box.innerHTML = messages.map(m => {
+        const isMine = m.author === userName;
+        return `
+          <div class="msg ${isMine ? "mine" : "theirs"}">
+            <div class="msg-head">
+              <span class="msg-author">${escapeHtml(m.author)}</span>
+              <span class="msg-time">${escapeHtml(m.time || "")}</span>
+            </div>
+            <div class="msg-text">${escapeHtml(m.text)}</div>
+          </div>
+        `;
+      }).join("");
+      if (wasAtBottom) box.scrollTop = box.scrollHeight;
+    }
+
+    init();
+  </script>
+</body>
+</html>
