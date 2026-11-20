@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Для Анастасии ✨</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: rgba(30, 41, 59, 0.88);
+      --accent: #3b82f6;
+      --gold: #f59e0b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #1e293b 0%, #070b14 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .welcome-splash {
+      position: fixed; inset: 0;
+      background: radial-gradient(circle at center, #1e293b 0%, #070b14 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; padding: 20px; text-align: center;
+      animation: splashAutoHide 1.1s ease 3.5s forwards;
+    }
+    @keyframes splashAutoHide {
+      to { opacity: 0; visibility: hidden; pointer-events: none; }
+    }
+    .welcome-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      font-weight: 700;
+      background: linear-gradient(120deg, #fde68a, #f59e0b, #60a5fa, #34d399);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 22px rgba(245, 158, 11, 0.3));
+      opacity: 0; transform: translateY(15px) scale(0.96);
+      animation: textReveal 1.4s ease forwards, shimmer 4s linear infinite;
+    }
+    .welcome-sub {
+      margin-top: 14px; font-size: 0.95rem; color: #cbd5e1; letter-spacing: 0.06em;
+      opacity: 0; animation: subReveal 1.2s ease 0.5s forwards;
+    }
+    @keyframes textReveal { to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes subReveal { to { opacity: 0.85; } }
+    @keyframes shimmer { to { background-position: 200% center; } }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px 22px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(14px);
+      animation: cardShow 0.9s ease 3.7s forwards;
+      position: relative;
+      z-index: 10;
+    }
+    @keyframes cardShow {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.14);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #f8fafc;
+    }
+    .story {
+      color: #cbd5e1;
+      font-size: 0.94rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .wish-box {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-bottom: 10px;
+      min-height: 105px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fde68a;
+      line-height: 1.5;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .wish-box.pop {
+      transform: scale(0.97);
+      opacity: 0.6;
+    }
+    .counter {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .btn-magic {
+      width: 100%;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(245, 158, 11, 0.3);
+      margin-bottom: 12px;
+      transition: transform 0.15s ease;
+    }
+    .btn-magic:active {
+      transform: scale(0.97);
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 1.4rem;
+      z-index: 999;
+      animation: floatUp 1.3s ease-out forwards;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.7); opacity: 1; }
+      100% { transform: translateY(-110px) scale(1.3); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="welcome-splash">
+    <h1 class="welcome-title">Здравствуйте, Анастасия ✨</h1>
+    <div class="welcome-sub">Небольшой сюрприз от соседа с 5-го этажа</div>
+  </div>
+
+  <div class="card">
+    <div class="badge">🏡 Соседи • 5 и 2 этаж</div>
+    <h1>Привет, Настя! 👋</h1>
+    <p class="story">
+      Решил сделать для тебя эту маленькую страницу сам — просто чтобы поднять настроение в любой день.<br><br>
+      Кстати, меня до сих пор немного грызет совесть за тот давний случай на лестнице, когда я торопился, растерялся и не помог тебе подняться с костылями. Надеюсь, ножка давно в полном порядке! 🙂
+    </p>
+
+    <div class="wish-box" id="wish-text">
+      Я собрал здесь 65 теплых пожеланий специально для тебя. Нажимай на кнопку, когда захочется улыбнуться ✨
+    </div>
+    <div class="counter" id="wish-counter">Послание 0 из 65</div>
+
+    <button class="btn-magic" onclick="nextWish(event)">Получить порцию тепла ✨</button>
+    <div class="footer-note">Сделано лично Дмитрием • Если захочешь поболтать, просто ответь мне в чате 🙂</div>
+  </div>
+
+  <script>
+    const wishes = [
+      "Пусть сегодняшний день принесет тебе как минимум три повода искренне улыбнуться! 😊",
+      "Ты очень светлая и приятная девушка — рядом с тобой даже в хмурый день становится теплее ✨",
+      "Помни: если вдруг понадобится мужская помощь по дому или донести тяжелые пакеты — сосед с 5-го этажа всегда рад выручить 💪",
+      "Желаю, чтобы все твои планы сбывались легко, а рядом всегда были надежные и добрые люди 🌟",
+      "Как насчет того, чтобы как-нибудь выпить вкусного кофе и просто погулять без спешки? ☕🙂",
+      "Береги себя и побольше отдыхай — ты заслуживаешь самого лучшего настроения каждый день 💐",
+      "Пусть любая погода за окном будет только поводом для уютного вечера с вкусным чаем 🍵",
+      "У тебя удивительно теплая энергетика — даже случайная встреча в подъезде поднимает настроение на весь день ☀️",
+      "Пусть все трудности обходят твой дом стороной, а в жизни будет больше спокойствия и радости 🏡",
+      "Если день выдался тяжелым — просто выдохни, улыбнись и знай, что кто-то совсем рядом желает тебе добра 💛",
+      "Желаю тебе сегодня найти неожиданную приятную мелочь, которая сделает этот вечер особенным ✨",
+      "Пусть каждый твой день начинается с хороших новостей и бодрого утра 🌅",
+      "Ты из тех редких людей, с кем хочется просто поговорить по душам никуда не торопясь 💬",
+      "Если вдруг нужно что-то привезти, отвезти или поднять на второй этаж — не стесняйся, просто напиши 🚗",
+      "Пусть у тебя всегда хватает сил и вдохновения на все, о чем ты мечтаешь 🌠",
+      "Желаю, чтобы сегодня тебя окружали только вежливые, добрые и искренние люди 😊",
+      "Пусть в твоей жизни будет поменьше суеты и побольше моментов, когда на душе спокойно и легко 🌿",
+      "Ты очень красивая — и это не просто слова, а факт, который сложно не заметить 🌷",
+      "Пусть вечер подарит тебе отличный фильм, вкусный ужин и полноценный отдых 🎬",
+      "Желаю, чтобы любые рабочие и домашние дела решались сегодня на раз-два ⚡",
+      "Помни, что ты сильная и замечательная, но иногда можно позволить себе просто побыть слабой и принять помощь 🤝",
+      "Пусть эта неделя принесет тебе маленькое чудо или приятный сюрприз 🎁",
+      "Желаю тебе крепкого здоровья, легкой походки и отличного самочувствия в любое время года 🍀",
+      "Даже если на улице пасмурно и холодно, пусть у тебя внутри всегда светит солнце ☀️",
+      "Надеюсь, ты сегодня вкусно пообедала и не забыла сделать перерыв в делах 🥐",
+      "Пусть рядом с тобой всегда будет надежное плечо, на которое можно опереться без лишних слов 🛡️",
+      "Желаю тебе сегодня услышать ту самую песню, от которой сразу становится хорошо на душе 🎶",
+      "Ты заслуживаешь того, чтобы о тебе заботились искренне и без всяких поводов 💛",
+      "Пусть все задуманное на этот месяц сложится даже лучше, чем ты планировала 📈",
+      "Если захочется просто проветриться и пройтись по набережной — я с радостью составлю компанию 🌊",
+      "Пусть сегодняшний сон будет крепким, а завтрашнее утро — добрым и неспешным 🌙",
+      "У тебя очень добрые глаза — это сразу чувствуется при встрече ✨",
+      "Желаю, чтобы в твоем доме всегда пахло уютом, свежестью и чем-нибудь вкусным 🥧",
+      "Пусть ни один пустяк сегодня не сможет испортить твое прекрасное настроение 🎈",
+      "Ты умеешь украсить собой даже самый обычный день в самом обычном подъезде 😊",
+      "Желаю тебе побольше поводов для звонкого, искреннего смеха 😄",
+      "Если вдруг дома перегорит лампочка или закапризничает кран — ты знаешь, на каком этаже живет мастер на все руки 🔧",
+      "Пусть удача сегодня идет с тобой за руку во всех делах 🍀",
+      "Желаю тебе встретить этот вечер в полном уюте и гармонии с собой 🕯️",
+      "Пусть в твоем телефоне чаще появляются сообщения, от которых хочется улыбаться 📱",
+      "Ты очень интересный человек, и мне правда хочется узнать тебя поближе 🌟",
+      "Желаю, чтобы все твои тревоги растворились, как утренний туман над Волгой 🌅",
+      "Пусть сегодня тебе повезет в чем-то важном — даже в самой маленькой мелочи 🎯",
+      "Не забывай хвалить себя за каждый прожитый день — ты молодец 👏",
+      "Пусть вокруг тебя будет больше красоты, музыки и живого общения 🎨",
+      "Желаю, чтобы выходные прошли именно так, как ты сама этого захочешь 🛋️",
+      "Ты достойна самого бережного и уважительного отношения к себе 👑",
+      "Пусть сегодняшний день оставит после себя только теплые воспоминания 📸",
+      "Если захочется сладкого к чаю — только намекни, сосед с 5-го этажа мигом организует 🍫",
+      "Желаю тебе энергии, легкости и вдохновения на новые идеи 💡",
+      "Пусть в твоей жизни будет больше путешествий, красивых мест и ярких впечатлений 🗺️",
+      "Даже короткое «Привет» от тебя способно сделать день намного лучше 🙂",
+      "Желаю, чтобы близкие люди всегда были здоровы и радовали тебя ❤️",
+      "Пусть любая задача, за которую ты сегодня возьмешься, принесет удовольствие и отличный результат 🏆",
+      "Помни: ты никогда не одна, рядом есть люди, которым ты искренне небезразлична 🤝",
+      "Желаю тебе сегодня поймать волну спокойствия и никуда не спешить 🌊",
+      "Пусть в твоем гардеробе и в жизни всегда будет место для ярких красок 👗",
+      "Ты невероятно обаятельная девушка — оставайся всегда такой же настоящей 🌸",
+      "Желаю, чтобы все двери перед тобой открывались легко и вовремя 🔑",
+      "Пусть этот вечер станет отличным завершением продуктивного дня ✨",
+      "Если будет скучно или грустно — просто напиши мне, придумаем, как поднять настроение 🎲",
+      "Желаю тебе финансового благополучия, чтобы ни в чем себе не отказывать 💎",
+      "Пусть каждый новый день приносит тебе уверенность в завтрашнем дне 🌤️",
+      "Спасибо, что просто есть и делаешь этот дом чуточку светлее 🏡",
+      "И самое главное пожелание: будь счастлива по-настоящему, каждый день и без всяких условий! 💛✨"
+    ];
+
+    let currentIdx = -1;
+
+    function nextWish(e) {
+      const box = document.getElementById("wish-text");
+      const counter = document.getElementById("wish-counter");
+      box.classList.add("pop");
+
+      setTimeout(() => {
+        currentIdx = (currentIdx + 1) % wishes.length;
+        box.textContent = wishes[currentIdx];
+        counter.textContent = `Послание ${currentIdx + 1} из ${wishes.length}`;
+        box.classList.remove("pop");
+      }, 200);
+
+      spawnSparkles(e);
+    }
+
+    function spawnSparkles(e) {
+      const icons = ["✨", "💛", "🌟", "💫", "😊", "🌷"];
+      const rect = e.target.getBoundingClientRect();
+      for (let i = 0; i < 6; i++) {
+        const el = document.createElement("div");
+        el.className = "sparkle";
+        el.textContent = icons[Math.floor(Math.random() * icons.length)];
+        el.style.left = (rect.left + rect.width * Math.random()) + "px";
+        el.style.top = (rect.top - 10) + "px";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1300);
+      }
+    }
+  </script>
+</body>
+</html>
